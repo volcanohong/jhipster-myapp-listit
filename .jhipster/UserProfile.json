@@ -1,0 +1,80 @@
+{
+  "name": "UserProfile",
+  "fields": [
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "15"
+    },
+    {
+      "fieldName": "emailEnabled",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "smsEnabled",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastLoginDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastLoginIp",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isLocked",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lockDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "maxImages",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["max"],
+      "fieldValidateRulesMax": "20"
+    },
+    {
+      "fieldName": "validDays",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["max"],
+      "fieldValidateRulesMax": "90"
+    },
+    {
+      "fieldName": "isPrivacyEnabled",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "location",
+      "otherEntityField": "id",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200713172242",
+  "entityTableName": "user_profile",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

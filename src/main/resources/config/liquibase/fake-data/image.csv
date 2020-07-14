@@ -1,0 +1,11 @@
+id;url;content;content_content_type;is_top
+1;http://jaydon.org;../fake-data/blob/hipster.png;image/png;true
+2;https://mittie.com;../fake-data/blob/hipster.png;image/png;true
+3;https://minnie.net;../fake-data/blob/hipster.png;image/png;false
+4;https://carmine.biz;../fake-data/blob/hipster.png;image/png;false
+5;https://kobe.biz;../fake-data/blob/hipster.png;image/png;true
+6;https://gillian.info;../fake-data/blob/hipster.png;image/png;true
+7;http://janelle.biz;../fake-data/blob/hipster.png;image/png;false
+8;http://jeramy.net;../fake-data/blob/hipster.png;image/png;false
+9;https://sunny.net;../fake-data/blob/hipster.png;image/png;true
+10;https://crystel.org;../fake-data/blob/hipster.png;image/png;false

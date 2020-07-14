@@ -1,0 +1,12 @@
+{
+  "listitApp": {
+    "ProductCondition": {
+      "null": "",
+      "NEW": "NEW",
+      "EXCELLENT": "EXCELLENT",
+      "GOOD": "GOOD",
+      "FAIR": "FAIR",
+      "WORN": "WORN"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "City",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "25"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "province",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "province",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200713172642",
+  "entityTableName": "city",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": true,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "skipClient": true
+}

@@ -1,0 +1,106 @@
+
+
+@dto(mapstruct)
+entity Post {
+	name String required minlength(4) maxlength(50),
+    detail String maxlength(1024),
+    searchText String maxlength(100),
+    price Double,
+    priceNegotiable Boolean,
+    condition ProductCondition required,
+    status PostStatus required,
+    createdDate Instant required,
+    lastModifiedDate Instant,
+    lastReviewedData Instant,
+    reviewedCount Integer
+}
+
+@dto(mapstruct)
+entity UserProfile {
+	phone String  maxlength(15),
+    emailEnabled Boolean,
+    smsEnabled Boolean,
+	lastLoginDate Instant,
+    lastLoginIp Integer,
+    isLocked Boolean,
+    lockDate Instant,
+    maxImages Integer max(20),
+    validDays Integer max(90),
+    isPrivacyEnabled Boolean
+}
+
+entity Image {
+	url String,
+	content ImageBlob,
+    isTop Boolean
+}
+
+entity Location {
+	address String maxlength(128),
+	postCode String maxlength(10)
+}
+
+@dto(mapstruct)
+entity PostCategory {
+	name String required maxlength(30),
+    isEnabled Boolean,
+    maxImages Integer max(20),
+    validDays Integer max(90)
+}
+
+@skipClient
+entity City {
+	name String required maxlength(25)
+}
+
+@skipClient
+entity Province {
+	code String required maxlength(4),
+    name String required maxlength(25),
+    country Country
+}
+
+enum Country {
+	CA (Canada)
+}
+
+enum ProductCondition {
+	NEW, EXCELLENT, GOOD, FAIR, WORN
+}
+
+enum PostStatus {
+	ACTIVE, DELETED, PENDING
+}
+
+relationship OneToOne {
+    UserProfile{user} to User,
+    UserProfile{location} to Location,
+    Post{location} to Location,
+    Post{category} to PostCategory,
+    Location{city} to City
+}
+
+relationship ManyToOne {
+	Post{user} to User,
+    City{province} to Province,
+    PostCategory{category} to PostCategory,
+    Post{image} to Image
+}
+
+// Set pagination options
+// paginate UserProfile, UserSetting with infinite-scroll
+paginate Post with pagination
+
+// Use Data Transfert Objects (DTO)
+//dto Post, UserProfile, PostCategory with mapstruct
+
+//skipClient City, Province
+
+// Set service options to all except few
+// service all with serviceImpl except Employee, Job
+service Post, UserProfile, PostCategory with serviceClass
+
+filter Post
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

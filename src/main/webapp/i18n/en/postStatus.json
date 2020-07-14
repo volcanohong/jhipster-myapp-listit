@@ -1,0 +1,10 @@
+{
+  "listitApp": {
+    "PostStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "DELETED": "DELETED",
+      "PENDING": "PENDING"
+    }
+  }
+}
