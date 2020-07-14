@@ -1,11 +1,13 @@
 export const enum ProductCondition {
   NEW = 'NEW',
 
-  EXCELLENT = 'EXCELLENT',
+  SUPERB = 'SUPERB',
 
   GOOD = 'GOOD',
 
   FAIR = 'FAIR',
 
   WORN = 'WORN',
+
+  NA = 'NA',
 }

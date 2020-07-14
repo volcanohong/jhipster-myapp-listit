@@ -107,10 +107,6 @@ export const PostDetail = (props: IPostDetailProps) => {
             <Translate contentKey="listitApp.post.user">User</Translate>
           </dt>
           <dd>{postEntity.userId ? postEntity.userId : ''}</dd>
-          <dt>
-            <Translate contentKey="listitApp.post.image">Image</Translate>
-          </dt>
-          <dd>{postEntity.imageId ? postEntity.imageId : ''}</dd>
         </dl>
         <Button tag={Link} to="/post" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

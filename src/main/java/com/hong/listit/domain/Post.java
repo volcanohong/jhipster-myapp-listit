@@ -13,12 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Post.
@@ -42,8 +45,8 @@ public class Post implements Serializable {
     @Column(name = "detail", length = 1024)
     private String detail;
 
-    @Size(max = 100)
-    @Column(name = "search_text", length = 100)
+    @Size(max = 50)
+    @Column(name = "search_text", length = 50)
     private String searchText;
 
     @Column(name = "price")
@@ -52,9 +55,8 @@ public class Post implements Serializable {
     @Column(name = "price_negotiable")
     private Boolean priceNegotiable;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "jhi_condition", nullable = false)
+    @Column(name = "jhi_condition")
     private ProductCondition condition;
 
     @NotNull
@@ -87,9 +89,8 @@ public class Post implements Serializable {
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
     private User user;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "posts", allowSetters = true)
-    private Image image;
+    @OneToMany(mappedBy = "post")
+    private Set<Image> images = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -282,17 +283,29 @@ public class Post implements Serializable {
         this.user = user;
     }
 
-    public Image getImage() {
-        return image;
+    public Set<Image> getImages() {
+        return images;
     }
 
-    public Post image(Image image) {
-        this.image = image;
+    public Post images(Set<Image> images) {
+        this.images = images;
         return this;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public Post addImage(Image image) {
+        this.images.add(image);
+        image.setPost(this);
+        return this;
+    }
+
+    public Post removeImage(Image image) {
+        this.images.remove(image);
+        image.setPost(null);
+        return this;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

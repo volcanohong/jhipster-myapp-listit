@@ -20,14 +20,13 @@ public class PostDTO implements Serializable {
     @Size(max = 1024)
     private String detail;
 
-    @Size(max = 100)
+    @Size(max = 50)
     private String searchText;
 
     private Double price;
 
     private Boolean priceNegotiable;
 
-    @NotNull
     private ProductCondition condition;
 
     @NotNull
@@ -48,8 +47,6 @@ public class PostDTO implements Serializable {
     private Long categoryId;
 
     private Long userId;
-
-    private Long imageId;
     
     public Long getId() {
         return id;
@@ -171,14 +168,6 @@ public class PostDTO implements Serializable {
         this.userId = userId;
     }
 
-    public Long getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(Long imageId) {
-        this.imageId = imageId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -215,7 +204,6 @@ public class PostDTO implements Serializable {
             ", locationId=" + getLocationId() +
             ", categoryId=" + getCategoryId() +
             ", userId=" + getUserId() +
-            ", imageId=" + getImageId() +
             "}";
     }
 }

@@ -2,6 +2,7 @@ package com.hong.listit.web.rest;
 
 import com.hong.listit.ListitApp;
 import com.hong.listit.domain.Image;
+import com.hong.listit.domain.Post;
 import com.hong.listit.repository.ImageRepository;
 import com.hong.listit.service.ImageService;
 import com.hong.listit.service.dto.ImageDTO;
@@ -325,6 +326,26 @@ public class ImageResourceIT {
         // Get all the imageList where isTop is null
         defaultImageShouldNotBeFound("isTop.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllImagesByPostIsEqualToSomething() throws Exception {
+        // Initialize the database
+        imageRepository.saveAndFlush(image);
+        Post post = PostResourceIT.createEntity(em);
+        em.persist(post);
+        em.flush();
+        image.setPost(post);
+        imageRepository.saveAndFlush(image);
+        Long postId = post.getId();
+
+        // Get all the imageList where post equals to postId
+        defaultImageShouldBeFound("postId.equals=" + postId);
+
+        // Get all the imageList where post equals to postId + 1
+        defaultImageShouldNotBeFound("postId.equals=" + (postId + 1));
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */

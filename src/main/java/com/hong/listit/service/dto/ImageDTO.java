@@ -1,13 +1,13 @@
 package com.hong.listit.service.dto;
 
-import java.io.Serializable;
 import javax.persistence.Lob;
+import java.io.Serializable;
 
 /**
  * A DTO for the {@link com.hong.listit.domain.Image} entity.
  */
 public class ImageDTO implements Serializable {
-    
+
     private Long id;
 
     private String url;
@@ -18,7 +18,9 @@ public class ImageDTO implements Serializable {
     private String contentContentType;
     private Boolean isTop;
 
-    
+
+    private Long postId;
+
     public Long getId() {
         return id;
     }
@@ -59,6 +61,14 @@ public class ImageDTO implements Serializable {
         this.isTop = isTop;
     }
 
+    public Long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -84,6 +94,7 @@ public class ImageDTO implements Serializable {
             ", url='" + getUrl() + "'" +
             ", content='" + getContent() + "'" +
             ", isTop='" + isIsTop() + "'" +
+            ", postId=" + getPostId() +
             "}";
     }
 }

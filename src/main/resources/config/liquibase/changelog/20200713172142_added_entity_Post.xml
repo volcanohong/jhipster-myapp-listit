@@ -22,7 +22,7 @@
             <column name="detail" type="varchar(1024)">
                 <constraints nullable="true" />
             </column>
-            <column name="search_text" type="varchar(100)">
+            <column name="search_text" type="varchar(50)">
                 <constraints nullable="true" />
             </column>
             <column name="price" type="double">
@@ -32,7 +32,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="jhi_condition" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="false" />
@@ -56,9 +56,6 @@
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_post_category_id" />
             </column>
             <column name="user_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="image_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

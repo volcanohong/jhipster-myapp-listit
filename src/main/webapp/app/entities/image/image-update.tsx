@@ -7,6 +7,8 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, setFileData, o
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { IPost } from 'app/shared/model/post.model';
+import { getEntities as getPosts } from 'app/entities/post/post.reducer';
 import { getEntity, updateEntity, createEntity, setBlob, reset } from './image.reducer';
 import { IImage } from 'app/shared/model/image.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -15,9 +17,10 @@ import { mapIdList } from 'app/shared/util/entity-utils';
 export interface IImageUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const ImageUpdate = (props: IImageUpdateProps) => {
+  const [postId, setPostId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { imageEntity, loading, updating } = props;
+  const { imageEntity, posts, loading, updating } = props;
 
   const { content, contentContentType } = imageEntity;
 
@@ -31,6 +34,8 @@ export const ImageUpdate = (props: IImageUpdateProps) => {
     } else {
       props.getEntity(props.match.params.id);
     }
+
+    props.getPosts();
   }, []);
 
   const onBlobChange = (isAnImage, name) => event => {
@@ -129,6 +134,21 @@ export const ImageUpdate = (props: IImageUpdateProps) => {
                   <Translate contentKey="listitApp.image.isTop">Is Top</Translate>
                 </Label>
               </AvGroup>
+              <AvGroup>
+                <Label for="image-post">
+                  <Translate contentKey="listitApp.image.post">Post</Translate>
+                </Label>
+                <AvInput id="image-post" type="select" className="form-control" name="postId">
+                  <option value="" key="0" />
+                  {posts
+                    ? posts.map(otherEntity => (
+                        <option value={otherEntity.id} key={otherEntity.id}>
+                          {otherEntity.id}
+                        </option>
+                      ))
+                    : null}
+                </AvInput>
+              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/image" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -151,6 +171,7 @@ export const ImageUpdate = (props: IImageUpdateProps) => {
 };
 
 const mapStateToProps = (storeState: IRootState) => ({
+  posts: storeState.post.entities,
   imageEntity: storeState.image.entity,
   loading: storeState.image.loading,
   updating: storeState.image.updating,
@@ -158,6 +179,7 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
+  getPosts,
   getEntity,
   updateEntity,
   setBlob,

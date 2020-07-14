@@ -125,9 +125,6 @@ export const Post = (props: IPostProps) => {
                 <th>
                   <Translate contentKey="listitApp.post.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="listitApp.post.image">Image</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -161,7 +158,6 @@ export const Post = (props: IPostProps) => {
                   <td>{post.locationId ? <Link to={`location/${post.locationId}`}>{post.locationId}</Link> : ''}</td>
                   <td>{post.categoryId ? <Link to={`post-category/${post.categoryId}`}>{post.categoryId}</Link> : ''}</td>
                   <td>{post.userId ? post.userId : ''}</td>
-                  <td>{post.imageId ? <Link to={`image/${post.imageId}`}>{post.imageId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${post.id}`} color="info" size="sm">

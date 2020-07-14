@@ -4,6 +4,7 @@ export interface IImage {
   contentContentType?: string;
   content?: any;
   isTop?: boolean;
+  postId?: number;
 }
 
 export const defaultValue: Readonly<IImage> = {

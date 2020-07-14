@@ -1,5 +1,6 @@
 package com.hong.listit.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -30,6 +31,10 @@ public class Image implements Serializable {
 
     @Column(name = "is_top")
     private Boolean isTop;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "images", allowSetters = true)
+    private Post post;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -90,6 +95,19 @@ public class Image implements Serializable {
 
     public void setIsTop(Boolean isTop) {
         this.isTop = isTop;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public Image post(Post post) {
+        this.post = post;
+        return this;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

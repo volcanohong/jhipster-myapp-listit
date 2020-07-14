@@ -138,7 +138,7 @@ public class PostQueryService extends QueryService<Post> {
             }
             if (criteria.getImageId() != null) {
                 specification = specification.and(buildSpecification(criteria.getImageId(),
-                    root -> root.join(Post_.image, JoinType.LEFT).get(Image_.id)));
+                    root -> root.join(Post_.images, JoinType.LEFT).get(Image_.id)));
             }
         }
         return specification;

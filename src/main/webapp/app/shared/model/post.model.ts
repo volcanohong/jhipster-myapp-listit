@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IImage } from 'app/shared/model/image.model';
 import { ProductCondition } from 'app/shared/model/enumerations/product-condition.model';
 import { PostStatus } from 'app/shared/model/enumerations/post-status.model';
 
@@ -18,7 +19,7 @@ export interface IPost {
   locationId?: number;
   categoryId?: number;
   userId?: number;
-  imageId?: number;
+  images?: IImage[];
 }
 
 export const defaultValue: Readonly<IPost> = {

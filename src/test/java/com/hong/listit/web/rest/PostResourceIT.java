@@ -1,18 +1,28 @@
 package com.hong.listit.web.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.hong.listit.ListitApp;
-import com.hong.listit.domain.Post;
+import com.hong.listit.domain.Image;
 import com.hong.listit.domain.Location;
+import com.hong.listit.domain.Post;
 import com.hong.listit.domain.PostCategory;
 import com.hong.listit.domain.User;
-import com.hong.listit.domain.Image;
+import com.hong.listit.domain.enumeration.PostStatus;
+import com.hong.listit.domain.enumeration.ProductCondition;
 import com.hong.listit.repository.PostRepository;
+import com.hong.listit.service.PostQueryService;
 import com.hong.listit.service.PostService;
 import com.hong.listit.service.dto.PostDTO;
 import com.hong.listit.service.mapper.PostMapper;
-import com.hong.listit.service.dto.PostCriteria;
-import com.hong.listit.service.PostQueryService;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +32,11 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import com.hong.listit.domain.enumeration.ProductCondition;
-import com.hong.listit.domain.enumeration.PostStatus;
 /**
  * Integration tests for the {@link PostResource} REST controller.
  */
@@ -59,7 +62,7 @@ public class PostResourceIT {
     private static final Boolean UPDATED_PRICE_NEGOTIABLE = true;
 
     private static final ProductCondition DEFAULT_CONDITION = ProductCondition.NEW;
-    private static final ProductCondition UPDATED_CONDITION = ProductCondition.EXCELLENT;
+    private static final ProductCondition UPDATED_CONDITION = ProductCondition.SUPERB;
 
     private static final PostStatus DEFAULT_STATUS = PostStatus.ACTIVE;
     private static final PostStatus UPDATED_STATUS = PostStatus.DELETED;
@@ -216,26 +219,6 @@ public class PostResourceIT {
 
     @Test
     @Transactional
-    public void checkConditionIsRequired() throws Exception {
-        int databaseSizeBeforeTest = postRepository.findAll().size();
-        // set the field null
-        post.setCondition(null);
-
-        // Create the Post, which fails.
-        PostDTO postDTO = postMapper.toDto(post);
-
-
-        restPostMockMvc.perform(post("/api/posts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(postDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Post> postList = postRepository.findAll();
-        assertThat(postList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkStatusIsRequired() throws Exception {
         int databaseSizeBeforeTest = postRepository.findAll().size();
         // set the field null
@@ -297,7 +280,7 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].lastReviewedData").value(hasItem(DEFAULT_LAST_REVIEWED_DATA.toString())))
             .andExpect(jsonPath("$.[*].reviewedCount").value(hasItem(DEFAULT_REVIEWED_COUNT)));
     }
-    
+
     @Test
     @Transactional
     public void getPost() throws Exception {
@@ -1166,7 +1149,7 @@ public class PostResourceIT {
         Image image = ImageResourceIT.createEntity(em);
         em.persist(image);
         em.flush();
-        post.setImage(image);
+        post.addImage(image);
         postRepository.saveAndFlush(post);
         Long imageId = image.getId();
 

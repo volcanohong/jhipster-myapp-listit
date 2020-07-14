@@ -26,11 +26,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="image_id"
-                                 baseTableName="post"
-                                 constraintName="fk_post_image_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="image"/>
-
     </changeSet>
 </databaseChangeLog>

@@ -3,10 +3,11 @@
     "ProductCondition": {
       "null": "",
       "NEW": "NEW",
-      "EXCELLENT": "EXCELLENT",
+      "SUPERB": "SUPERB",
       "GOOD": "GOOD",
       "FAIR": "FAIR",
-      "WORN": "WORN"
+      "WORN": "WORN",
+      "NA": "NA"
     }
   }
 }

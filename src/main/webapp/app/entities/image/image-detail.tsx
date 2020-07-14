@@ -56,6 +56,10 @@ export const ImageDetail = (props: IImageDetailProps) => {
             </span>
           </dt>
           <dd>{imageEntity.isTop ? 'true' : 'false'}</dd>
+          <dt>
+            <Translate contentKey="listitApp.image.post">Post</Translate>
+          </dt>
+          <dd>{imageEntity.postId ? imageEntity.postId : ''}</dd>
         </dl>
         <Button tag={Link} to="/image" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

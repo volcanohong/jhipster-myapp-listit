@@ -18,7 +18,7 @@
       "fieldName": "searchText",
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
-      "fieldValidateRulesMaxlength": "100"
+      "fieldValidateRulesMaxlength": "50"
     },
     {
       "fieldName": "price",
@@ -31,8 +31,7 @@
     {
       "fieldName": "condition",
       "fieldType": "ProductCondition",
-      "fieldValues": "NEW,EXCELLENT,GOOD,FAIR,WORN",
-      "fieldValidateRules": ["required"]
+      "fieldValues": "NEW,SUPERB,GOOD,FAIR,WORN,NA"
     },
     {
       "fieldName": "status",
@@ -83,7 +82,7 @@
       "otherEntityField": "id"
     },
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-many",
       "otherEntityName": "image",
       "otherEntityRelationshipName": "post",
       "relationshipName": "image",

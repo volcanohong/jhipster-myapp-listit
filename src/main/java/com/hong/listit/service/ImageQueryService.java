@@ -97,6 +97,10 @@ public class ImageQueryService extends QueryService<Image> {
             if (criteria.getIsTop() != null) {
                 specification = specification.and(buildSpecification(criteria.getIsTop(), Image_.isTop));
             }
+            if (criteria.getPostId() != null) {
+                specification = specification.and(buildSpecification(criteria.getPostId(),
+                    root -> root.join(Image_.post, JoinType.LEFT).get(Post_.id)));
+            }
         }
         return specification;
     }

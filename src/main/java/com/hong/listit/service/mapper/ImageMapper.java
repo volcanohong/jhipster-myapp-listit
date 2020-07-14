@@ -9,10 +9,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Image} and its DTO {@link ImageDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {PostMapper.class})
 public interface ImageMapper extends EntityMapper<ImageDTO, Image> {
 
+    @Mapping(source = "post.id", target = "postId")
+    ImageDTO toDto(Image image);
 
+    @Mapping(source = "postId", target = "post")
+    Image toEntity(ImageDTO imageDTO);
 
     default Image fromId(Long id) {
         if (id == null) {

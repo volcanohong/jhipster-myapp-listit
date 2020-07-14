@@ -45,6 +45,9 @@ export const Image = (props: IImageProps) => {
                 <th>
                   <Translate contentKey="listitApp.image.isTop">Is Top</Translate>
                 </th>
+                <th>
+                  <Translate contentKey="listitApp.image.post">Post</Translate>
+                </th>
                 <th />
               </tr>
             </thead>
@@ -73,6 +76,7 @@ export const Image = (props: IImageProps) => {
                     ) : null}
                   </td>
                   <td>{image.isTop ? 'true' : 'false'}</td>
+                  <td>{image.postId ? <Link to={`post/${image.postId}`}>{image.postId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${image.id}`} color="info" size="sm">

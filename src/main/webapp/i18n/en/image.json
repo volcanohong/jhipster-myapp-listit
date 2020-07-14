@@ -18,7 +18,8 @@
       },
       "url": "Url",
       "content": "Content",
-      "isTop": "Is Top"
+      "isTop": "Is Top",
+      "post": "Post"
     }
   }
 }

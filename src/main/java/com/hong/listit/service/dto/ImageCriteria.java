@@ -30,6 +30,8 @@ public class ImageCriteria implements Serializable, Criteria {
 
     private BooleanFilter isTop;
 
+    private LongFilter postId;
+
     public ImageCriteria() {
     }
 
@@ -37,6 +39,7 @@ public class ImageCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.url = other.url == null ? null : other.url.copy();
         this.isTop = other.isTop == null ? null : other.isTop.copy();
+        this.postId = other.postId == null ? null : other.postId.copy();
     }
 
     @Override
@@ -68,6 +71,14 @@ public class ImageCriteria implements Serializable, Criteria {
         this.isTop = isTop;
     }
 
+    public LongFilter getPostId() {
+        return postId;
+    }
+
+    public void setPostId(LongFilter postId) {
+        this.postId = postId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -81,7 +92,8 @@ public class ImageCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(url, that.url) &&
-            Objects.equals(isTop, that.isTop);
+            Objects.equals(isTop, that.isTop) &&
+            Objects.equals(postId, that.postId);
     }
 
     @Override
@@ -89,7 +101,8 @@ public class ImageCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         url,
-        isTop
+        isTop,
+        postId
         );
     }
 
@@ -100,6 +113,7 @@ public class ImageCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (url != null ? "url=" + url + ", " : "") +
                 (isTop != null ? "isTop=" + isTop + ", " : "") +
+                (postId != null ? "postId=" + postId + ", " : "") +
             "}";
     }
 

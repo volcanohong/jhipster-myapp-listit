@@ -15,7 +15,15 @@
       "fieldType": "Boolean"
     }
   ],
-  "relationships": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "image",
+      "relationshipName": "post",
+      "otherEntityField": "id"
+    }
+  ],
   "changelogDate": "20200713172342",
   "entityTableName": "image",
   "dto": "mapstruct",

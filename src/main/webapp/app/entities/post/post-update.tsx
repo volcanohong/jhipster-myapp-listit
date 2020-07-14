@@ -13,8 +13,6 @@ import { IPostCategory } from 'app/shared/model/post-category.model';
 import { getEntities as getPostCategories } from 'app/entities/post-category/post-category.reducer';
 import { IUser } from 'app/shared/model/user.model';
 import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
-import { IImage } from 'app/shared/model/image.model';
-import { getEntities as getImages } from 'app/entities/image/image.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './post.reducer';
 import { IPost } from 'app/shared/model/post.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -26,10 +24,9 @@ export const PostUpdate = (props: IPostUpdateProps) => {
   const [locationId, setLocationId] = useState('0');
   const [categoryId, setCategoryId] = useState('0');
   const [userId, setUserId] = useState('0');
-  const [imageId, setImageId] = useState('0');
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 
-  const { postEntity, locations, postCategories, users, images, loading, updating } = props;
+  const { postEntity, locations, postCategories, users, loading, updating } = props;
 
   const handleClose = () => {
     props.history.push('/post' + props.location.search);
@@ -45,7 +42,6 @@ export const PostUpdate = (props: IPostUpdateProps) => {
     props.getLocations();
     props.getPostCategories();
     props.getUsers();
-    props.getImages();
   }, []);
 
   useEffect(() => {
@@ -133,7 +129,7 @@ export const PostUpdate = (props: IPostUpdateProps) => {
                   type="text"
                   name="searchText"
                   validate={{
-                    maxLength: { value: 100, errorMessage: translate('entity.validation.maxlength', { max: 100 }) },
+                    maxLength: { value: 50, errorMessage: translate('entity.validation.maxlength', { max: 50 }) },
                   }}
                 />
               </AvGroup>
@@ -161,10 +157,11 @@ export const PostUpdate = (props: IPostUpdateProps) => {
                   value={(!isNew && postEntity.condition) || 'NEW'}
                 >
                   <option value="NEW">{translate('listitApp.ProductCondition.NEW')}</option>
-                  <option value="EXCELLENT">{translate('listitApp.ProductCondition.EXCELLENT')}</option>
+                  <option value="SUPERB">{translate('listitApp.ProductCondition.SUPERB')}</option>
                   <option value="GOOD">{translate('listitApp.ProductCondition.GOOD')}</option>
                   <option value="FAIR">{translate('listitApp.ProductCondition.FAIR')}</option>
                   <option value="WORN">{translate('listitApp.ProductCondition.WORN')}</option>
+                  <option value="NA">{translate('listitApp.ProductCondition.NA')}</option>
                 </AvInput>
               </AvGroup>
               <AvGroup>
@@ -276,21 +273,6 @@ export const PostUpdate = (props: IPostUpdateProps) => {
                     : null}
                 </AvInput>
               </AvGroup>
-              <AvGroup>
-                <Label for="post-image">
-                  <Translate contentKey="listitApp.post.image">Image</Translate>
-                </Label>
-                <AvInput id="post-image" type="select" className="form-control" name="imageId">
-                  <option value="" key="0" />
-                  {images
-                    ? images.map(otherEntity => (
-                        <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
-                        </option>
-                      ))
-                    : null}
-                </AvInput>
-              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/post" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
@@ -316,7 +298,6 @@ const mapStateToProps = (storeState: IRootState) => ({
   locations: storeState.location.entities,
   postCategories: storeState.postCategory.entities,
   users: storeState.userManagement.users,
-  images: storeState.image.entities,
   postEntity: storeState.post.entity,
   loading: storeState.post.loading,
   updating: storeState.post.updating,
@@ -327,7 +308,6 @@ const mapDispatchToProps = {
   getLocations,
   getPostCategories,
   getUsers,
-  getImages,
   getEntity,
   updateEntity,
   createEntity,
